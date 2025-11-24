@@ -162,7 +162,9 @@ void Game::spawnEnemy()
         calculateRandomComponentsForSpeed(amountOfVertices),
         amountOfVertices*40.0f); //defining rotating angle based on number of vertices
 
-    //TODO: need to create the CCollision, CScore and CLifespan components
+    //TODO: need to create the CScore and CLifespan components
+
+    entity->cCollision = std::make_shared<CCollision>(m_enemyConfig.CR);
 
     entity->cShape = std::make_shared<CShape>(m_enemyConfig.SR, 
     amountOfVertices, 
@@ -307,14 +309,7 @@ void Game::windowCollision() {
     for (auto e : m_entityManager.getEntities())
     {
         if (e->tag() != "player") {
-            if (e->cTransform->pos.y + e->cCollision->radius >= m_window.getPosition().y) {
-                std::cout << "oe2";
-                e->cTransform->pos.y +=  (-1)*e->cTransform->velocity.y;
-
-            } 
-            if (e->cTransform->pos.x + e->cCollision->radius >= m_window.getPosition().x) {                
-                e->cTransform->pos.x +=  (-1)*e->cTransform->velocity.x;
-            }         
+            //TODO: think about the collision code, couldnt understand what was done here before         
         }
     }
 }
